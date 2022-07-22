@@ -1,4 +1,4 @@
-import { teamns } from "../../Mock/Times"
+
 import * as C from './style'
 
 export const ListaSuspensa = (props) => {
@@ -10,7 +10,8 @@ export const ListaSuspensa = (props) => {
                     className={props.Style}
                     value={props.value} 
                     onChange={(e) => props.Change(e.target.value)}>
-                        {teamns.map((item) => {
+                        <option value=""></option>
+                        {props.campo.map((item) => {
                             return <option key={item}>{item}</option>
                         })}
                 </select>

@@ -3,25 +3,23 @@ import { CampoTexto } from "../CampoTexto/Index"
 import { ListaSuspensa } from "../ListaSuspensa/Index"
 import {AiOutlineFileImage, AiOutlineUser} from 'react-icons/ai'
 import {RiSuitcaseLine} from 'react-icons/ri'
-import{HiOutlineOfficeBuilding} from 'react-icons/hi'
+import {HiOutlineOfficeBuilding} from 'react-icons/hi'
+import { Cards } from "../../Mock/Cards"
 import * as C from './style'
 import { useState } from "react"
 
+export const Formulario = (props) => {
 
-export const Formulario = () => {
-  
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [image, setImage] = useState('')
     const [time, setTime] = useState('')
-    const [error, setError]= useState(false)
-
-    console.log(nome)
+    const [error, setError]= useState(false)    
 
     const handleClick = (e) => {
         e.preventDefault()
 
-        if(nome.length == 0 || cargo.length == 0 || image.length == 0 || time.length == 0){
+        if(nome.length === 0 || cargo.length === 0 || image.length === 0 || time.length == 0){
              setError(true)
         }else{
              setError(false)
@@ -29,6 +27,14 @@ export const Formulario = () => {
              setCargo('')
              setNome('')
              setImage('')
+             setTime('')
+
+             props.ColaborationSingUp({
+                nome,
+                cargo,
+                image,
+                time
+            })
         }   
     }
 
@@ -78,8 +84,10 @@ export const Formulario = () => {
                 <ListaSuspensa
                     value={time}
                     Change={(e) => setTime(e)} 
+                    campo={Cards.map(item => item.nome)}
                     Style={error ? `error` : ""}
-                    icon={<HiOutlineOfficeBuilding/>}/>
+                    icon={<HiOutlineOfficeBuilding/>}
+                    />
                     {error ? (
                         <C.invalid>Campo invalido</C.invalid> 
                     ): (
